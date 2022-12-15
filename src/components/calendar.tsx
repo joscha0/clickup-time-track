@@ -35,6 +35,8 @@ const TimeCalendar: NextPage<Props> = (props) => {
     <div className="w-full">
       <Calendar 
       usageStatistics={false}
+      week={{eventView: ['time'],
+taskView:false}}
       isReadOnly={true}
       calendars={newCalendars}
       events={events}
