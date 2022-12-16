@@ -26,44 +26,57 @@ const Home: NextPage = () => {
   const [calendars, setCalendars] = useState<string[]>([]);
   const [index, setIndex] = useState(0);
 
-  const [isLoading, setLoading] = useState(false);
+  const [apiKey, setApi] = useState("");
+  const [teamId, setTeam] = useState("");
 
-  const teamId = "30380538";
+  const [isLoading, setLoading] = useState(false);
 
   useEffect(() => {
     setLoading(true);
-    fetch(
-      `https://cors.960.eu/api.clickup.com/api/v2/team/${teamId}/time_entries`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "pk_48563893_3QW1Q2AITF3YLDKHW61MPDOQPBH9YLGU",
-        },
-      }
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        // console.log(data.data)
-        let calendars: string[] = [];
-        let newEvents: NewEvent[] = [];
-        data.data.forEach((element: any) => {
-          if (!calendars.includes(element.task_location.space_id)) {
-            calendars.push(element.task_location.space_id);
+    let apiKeyReq: string = localStorage.getItem("api-key") ?? "";
+    let teamIdReq: string = localStorage.getItem("team-id") ?? "";
+    setApi(apiKeyReq);
+    setTeam(teamIdReq);
+    if (apiKeyReq == "" || teamIdReq == "") {
+      setIndex(2);
+      setLoading(false);
+    } else {
+      console.log(apiKey);
+      fetch(
+        `https://cors.960.eu/api.clickup.com/api/v2/team/${teamIdReq}/time_entries`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: apiKeyReq,
+          },
+        }
+      )
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data.data);
+          if (data.data !== undefined) {
+            let calendars: string[] = [];
+            let newEvents: NewEvent[] = [];
+            data.data.forEach((element: any) => {
+              if (!calendars.includes(element.task_location.space_id)) {
+                calendars.push(element.task_location.space_id);
+              }
+              newEvents.push({
+                id: element.id,
+                calendarId: element.task_location.space_id,
+                title: element.task.name,
+                start: new Date(parseInt(element.start)).toISOString(),
+                end: new Date(parseInt(element.end)).toISOString(),
+                category: "time",
+              });
+            });
+            setEvents(newEvents);
+            setCalendars(calendars);
           }
-          newEvents.push({
-            id: element.id,
-            calendarId: element.task_location.space_id,
-            title: element.task.name,
-            start: new Date(parseInt(element.start)).toISOString(),
-            end: new Date(parseInt(element.end)).toISOString(),
-            category: "time",
-          });
+          setLoading(false);
         });
-        setEvents(newEvents);
-        setCalendars(calendars);
-        setLoading(false);
-      });
+    }
   }, []);
 
   if (isLoading) return <p>Loading...</p>;
@@ -84,7 +97,15 @@ const Home: NextPage = () => {
         <div className="container flex flex-col items-center justify-center gap-12 px-4 py-8 ">
           {index == 0 && <TimeCalendar events={events} calendars={calendars} />}
           {index == 1 && <List />}
-          {index == 2 && <Settings />}
+          {index == 2 && (
+            <Settings
+              onClick={setIndex}
+              setApi={setApi}
+              setTeam={setTeam}
+              apiKey={apiKey}
+              teamId={teamId}
+            />
+          )}
         </div>
       </main>
     </>
