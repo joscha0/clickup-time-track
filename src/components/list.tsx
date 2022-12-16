@@ -10,9 +10,10 @@ interface NewEvent {
 
 interface ListProps {
   events: NewEvent[];
+  teamId: string;
 }
 
-const List = ({ events }: ListProps) => {
+const List = ({ events, teamId }: ListProps) => {
   return (
     <div>
       <h1 className="py-4 text-center text-3xl text-white">List</h1>
@@ -32,7 +33,21 @@ const List = ({ events }: ListProps) => {
               events.map((event, index) => {
                 return (
                   <tr>
-                    <td>{event.calendarId}</td>
+                    <td>
+                      <a
+                        className="link"
+                        href={
+                          "https://app.clickup.com/" +
+                          teamId +
+                          "/v/l/s/" +
+                          event.calendarId
+                        }
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        {event.calendarId}
+                      </a>
+                    </td>
                     <td>{event.title}</td>
                     <td>{new Date(event.start).toLocaleString()}</td>
                     <td>{new Date(event.end).toLocaleString()}</td>
