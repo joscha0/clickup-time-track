@@ -1,28 +1,17 @@
-# Create T3 App
+# Clickup Time Track
 
-This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
+> View tracked time from [ClickUp](https://clickup.com) time tracking
 
-## What's next? How do I make an app with this?
+![Screenshot from 2022-12-16 05-24-37](https://user-images.githubusercontent.com/45885696/208022307-1f489257-7c7c-46c7-b6d2-8bd79a911f39.png)
 
-We try to keep this project as simple as possible, so you can start with just the scaffolding we set up for you, and add additional things later when they become necessary.
+## Features
+- Calendar View
+- List View
 
-If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
+## How to Use
+Fill the fields on the settings page and save
+- **API Key**: Profile (bottom left) > Apps > Generate
+- **Team Id**: app.clickup.com/`123456789`
 
-- [Next.js](https://nextjs.org)
-- [NextAuth.js](https://next-auth.js.org)
-- [Prisma](https://prisma.io)
-- [Tailwind CSS](https://tailwindcss.com)
-- [tRPC](https://trpc.io)
-
-## Learn More
-
-To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the following resources:
-
-- [Documentation](https://create.t3.gg/)
-- [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available) — Check out these awesome tutorials
-
-You can check out the [create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) — your feedback and contributions are welcome!
-
-## How do I deploy this?
-
-Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
+## Disclaimer
+**Unofficial** App! Not affiliated with ClickUp
