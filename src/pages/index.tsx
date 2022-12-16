@@ -19,6 +19,7 @@ interface NewEvent {
   start: string;
   end: string;
   category: string;
+  duration: string;
 }
 
 const Home: NextPage = () => {
@@ -69,6 +70,7 @@ const Home: NextPage = () => {
                 start: new Date(parseInt(element.start)).toISOString(),
                 end: new Date(parseInt(element.end)).toISOString(),
                 category: "time",
+                duration: element.duration,
               });
             });
             setEvents(newEvents);
@@ -96,7 +98,7 @@ const Home: NextPage = () => {
         <Menu onClick={setIndex} />
         <div className="container flex flex-col items-center justify-center gap-12 px-4 py-8 ">
           {index == 0 && <TimeCalendar events={events} calendars={calendars} />}
-          {index == 1 && <List />}
+          {index == 1 && <List events={events} />}
           {index == 2 && (
             <Settings
               onClick={setIndex}

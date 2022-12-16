@@ -12,6 +12,7 @@ interface NewEvent {
   start: string;
   end: string;
   category: string;
+  duration: string;
 }
 
 interface Props {
