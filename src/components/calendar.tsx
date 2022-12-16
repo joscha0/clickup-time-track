@@ -30,14 +30,54 @@ const TimeCalendar: NextPage<Props> = (props) => {
     return { id: calendar, name: calendar, backgroundColor: randomColor };
   });
 
+  const backgroundColor = "#121212";
+  const borderColor = "1px solid #2f2f2f";
+
   return (
-    <div className="w-full">
+    <div className="w-full overflow-hidden	">
       <Calendar
         usageStatistics={false}
-        week={{ eventView: ["time"], taskView: false }}
+        week={{ eventView: ["time"], taskView: false, startDayOfWeek: 1 }}
         isReadOnly={true}
         calendars={newCalendars}
         events={events}
+        theme={{
+          common: {
+            backgroundColor: backgroundColor,
+            border: borderColor,
+            holiday: {
+              color: "#fff",
+            },
+            saturday: {
+              color: "#fff",
+            },
+          },
+          week: {
+            today: {
+              color: "#575ae7",
+            },
+            dayName: {
+              borderLeft: borderColor,
+              borderTop: borderColor,
+              borderBottom: borderColor,
+            },
+            timeGrid: {
+              borderRight: borderColor,
+            },
+            timeGridLeft: {
+              borderRight: borderColor,
+            },
+            timeGridHalfHourLine: {
+              borderBottom: "1px solid #2F2F2F59",
+            },
+            timeGridHourLine: {
+              borderBottom: borderColor,
+            },
+            futureTime: {
+              color: "#b8b8b8",
+            },
+          },
+        }}
       />
     </div>
   );
