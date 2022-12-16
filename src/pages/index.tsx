@@ -81,8 +81,6 @@ const Home: NextPage = () => {
     }
   }, []);
 
-  if (isLoading) return <p>Loading...</p>;
-
   return (
     <>
       <Head>
@@ -96,19 +94,25 @@ const Home: NextPage = () => {
         className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-[#02276D] to-[#151A2C]"
       >
         <Menu onClick={setIndex} />
-        <div className="container flex flex-col items-center justify-center gap-12 px-4 py-8 ">
-          {index == 0 && <TimeCalendar events={events} calendars={calendars} />}
-          {index == 1 && <List events={events} />}
-          {index == 2 && (
-            <Settings
-              onClick={setIndex}
-              setApi={setApi}
-              setTeam={setTeam}
-              apiKey={apiKey}
-              teamId={teamId}
-            />
-          )}
-        </div>
+        {isLoading ? (
+          <button className="loading btn-square btn"></button>
+        ) : (
+          <div className="container flex flex-col items-center justify-center gap-12 px-4 py-8 ">
+            {index == 0 && (
+              <TimeCalendar events={events} calendars={calendars} />
+            )}
+            {index == 1 && <List events={events} teamId={teamId} />}
+            {index == 2 && (
+              <Settings
+                onClick={setIndex}
+                setApi={setApi}
+                setTeam={setTeam}
+                apiKey={apiKey}
+                teamId={teamId}
+              />
+            )}
+          </div>
+        )}
       </main>
     </>
   );
