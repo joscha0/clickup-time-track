@@ -34,7 +34,8 @@ const TimeCalendar: NextPage<Props> = (props) => {
   const borderColor = "1px solid #2f2f2f";
 
   return (
-    <div className="w-full overflow-hidden	">
+    <div className="w-full ">
+      <h1 className="py-4 text-center text-3xl text-white">Calendar</h1>
       <Calendar
         usageStatistics={false}
         week={{ eventView: ["time"], taskView: false, startDayOfWeek: 1 }}
