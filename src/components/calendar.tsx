@@ -21,13 +21,21 @@ interface Props {
 
 const TimeCalendar: NextPage<Props> = (props) => {
   const { events, calendars } = props;
+
+  const colors = [
+    "#4285F4",
+    "#FBBC04",
+    "#34A853",
+    "#F72A25",
+    "#1967D2",
+    "#188038",
+  ];
   useEffect(() => {
     console.log(events);
   }, []);
-  const newCalendars = calendars.map((calendar) => {
-    var randomColor =
-      "#" + ((Math.random() * 0xffffff) << 0).toString(16).padStart(6, "0");
-    return { id: calendar, name: calendar, backgroundColor: randomColor };
+  const newCalendars = calendars.map((calendar, index) => {
+    var color = colors[index % colors.length];
+    return { id: calendar, name: calendar, backgroundColor: color };
   });
 
   const backgroundColor = "#121212";
