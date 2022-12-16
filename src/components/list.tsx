@@ -32,7 +32,7 @@ const List = ({ events, teamId }: ListProps) => {
             {events.length > 0 &&
               events.map((event, index) => {
                 return (
-                  <tr>
+                  <tr key={index}>
                     <td>
                       <a
                         className="link"

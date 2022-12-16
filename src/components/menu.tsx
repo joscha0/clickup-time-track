@@ -1,5 +1,4 @@
 import { Calendar, Setting3, TableDocument } from "iconsax-react";
-import { NextPage } from "next";
 
 interface MenuProps {
   onClick: React.Dispatch<React.SetStateAction<number>>;

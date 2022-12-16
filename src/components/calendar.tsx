@@ -3,7 +3,6 @@
 import { NextPage } from "next";
 import Calendar from "@toast-ui/react-calendar";
 import "@toast-ui/calendar/dist/toastui-calendar.min.css";
-import { useEffect } from "react";
 
 interface NewEvent {
   id: string;
@@ -31,11 +30,9 @@ const TimeCalendar: NextPage<Props> = (props) => {
     "#1967D2",
     "#188038",
   ];
-  useEffect(() => {
-    console.log(events);
-  }, []);
+
   const newCalendars = calendars.map((calendar, index) => {
-    var color = colors[index % colors.length];
+    const color = colors[index % colors.length];
     return { id: calendar, name: calendar, backgroundColor: color };
   });
 

@@ -1,15 +1,14 @@
 import { useRouter } from "next/router";
-import { SetStateAction, useEffect, useState } from "react";
+import { SetStateAction } from "react";
 
 interface MenuProps {
-  onClick: React.Dispatch<React.SetStateAction<number>>;
   setApi: React.Dispatch<React.SetStateAction<string>>;
   setTeam: React.Dispatch<React.SetStateAction<string>>;
   apiKey: string;
   teamId: string;
 }
 
-const Settings = ({ onClick, setApi, setTeam, apiKey, teamId }: MenuProps) => {
+const Settings = ({ setApi, setTeam, apiKey, teamId }: MenuProps) => {
   const router = useRouter();
 
   const handleChangeApi = (event: {

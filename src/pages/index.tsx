@@ -2,11 +2,9 @@ import { type NextPage } from "next";
 import dynamic from "next/dynamic";
 
 import Head from "next/head";
-import Link from "next/link";
 const TimeCalendar = dynamic(() => import("../components/calendar"), {
   ssr: false,
 });
-// import TimeCalendar from "../components/calendar";
 import { useState, useEffect } from "react";
 import List from "../components/list";
 import Menu from "../components/menu";
@@ -34,8 +32,8 @@ const Home: NextPage = () => {
 
   useEffect(() => {
     setLoading(true);
-    let apiKeyReq: string = localStorage.getItem("api-key") ?? "";
-    let teamIdReq: string = localStorage.getItem("team-id") ?? "";
+    const apiKeyReq: string = localStorage.getItem("api-key") ?? "";
+    const teamIdReq: string = localStorage.getItem("team-id") ?? "";
     setApi(apiKeyReq);
     setTeam(teamIdReq);
     if (apiKeyReq == "" || teamIdReq == "") {
@@ -57,8 +55,8 @@ const Home: NextPage = () => {
         .then((data) => {
           console.log(data.data);
           if (data.data !== undefined) {
-            let calendars: string[] = [];
-            let newEvents: NewEvent[] = [];
+            const calendars: string[] = [];
+            const newEvents: NewEvent[] = [];
             data.data.forEach((element: any) => {
               if (!calendars.includes(element.task_location.space_id)) {
                 calendars.push(element.task_location.space_id);
@@ -104,7 +102,6 @@ const Home: NextPage = () => {
             {index == 1 && <List events={events} teamId={teamId} />}
             {index == 2 && (
               <Settings
-                onClick={setIndex}
                 setApi={setApi}
                 setTeam={setTeam}
                 apiKey={apiKey}
