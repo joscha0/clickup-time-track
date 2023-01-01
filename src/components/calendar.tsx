@@ -3,7 +3,7 @@
 import { NextPage } from "next";
 import Calendar from "@toast-ui/react-calendar";
 import "@toast-ui/calendar/dist/toastui-calendar.min.css";
-import React from "react";
+import React, { useState } from "react";
 import { ArrowLeft2, ArrowRight2 } from "iconsax-react";
 
 interface NewEvent {
@@ -23,6 +23,8 @@ interface Props {
 
 const TimeCalendar: NextPage<Props> = (props) => {
   const { events, calendars } = props;
+
+  var [viewText, setViewText] = useState("week");
 
   const colors = [
     "#4285F4",
@@ -67,6 +69,18 @@ const TimeCalendar: NextPage<Props> = (props) => {
       }
     }
   };
+
+  type ViewType = "month" | "week" | "day";
+  const handleClickChangeView = (view: ViewType) => {
+    if (calendarRef.current) {
+      const calendarInstance = calendarRef.current.getInstance();
+      if (calendarInstance) {
+        calendarInstance.changeView(view);
+      }
+    }
+    setViewText(view);
+  };
+
   return (
     <div className="w-full ">
       <h1 className="py-4 text-center text-3xl text-white">Calendar</h1>
@@ -79,11 +93,31 @@ const TimeCalendar: NextPage<Props> = (props) => {
       <button className="btn-circle btn" onClick={handleClickNextButton}>
         <ArrowRight2 size="32" color="#fff" />
       </button>
+      <div className="dropdown">
+        <label tabIndex={0} className="btn m-1">
+          {viewText}
+        </label>
+        <ul
+          tabIndex={0}
+          className="dropdown-content menu rounded-box w-52 bg-base-100 p-2 shadow"
+        >
+          <li>
+            <a onClick={() => handleClickChangeView("day")}>Day</a>
+          </li>
+          <li>
+            <a onClick={() => handleClickChangeView("week")}>Week</a>
+          </li>
+          <li>
+            <a onClick={() => handleClickChangeView("month")}>Month</a>
+          </li>
+        </ul>
+      </div>
       <Calendar
         ref={calendarRef}
         usageStatistics={false}
         week={{ eventView: ["time"], taskView: false, startDayOfWeek: 1 }}
         isReadOnly={true}
+        view={"week"}
         calendars={newCalendars}
         events={events}
         theme={{
