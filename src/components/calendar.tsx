@@ -3,6 +3,8 @@
 import { NextPage } from "next";
 import Calendar from "@toast-ui/react-calendar";
 import "@toast-ui/calendar/dist/toastui-calendar.min.css";
+import React from "react";
+import { ArrowLeft2, ArrowRight2 } from "iconsax-react";
 
 interface NewEvent {
   id: string;
@@ -39,10 +41,46 @@ const TimeCalendar: NextPage<Props> = (props) => {
   const backgroundColor = "#121212";
   const borderColor = "1px solid #2f2f2f";
 
+  const calendarRef = React.createRef<Calendar>();
+
+  const handleClickNextButton = () => {
+    if (calendarRef.current) {
+      const calendarInstance = calendarRef.current.getInstance();
+      if (calendarInstance) {
+        calendarInstance.next();
+      }
+    }
+  };
+  const handleClickPrevButton = () => {
+    if (calendarRef.current) {
+      const calendarInstance = calendarRef.current.getInstance();
+      if (calendarInstance) {
+        calendarInstance.prev();
+      }
+    }
+  };
+  const handleClickTodayButton = () => {
+    if (calendarRef.current) {
+      const calendarInstance = calendarRef.current.getInstance();
+      if (calendarInstance) {
+        calendarInstance.today();
+      }
+    }
+  };
   return (
     <div className="w-full ">
       <h1 className="py-4 text-center text-3xl text-white">Calendar</h1>
+      <button className="btn" onClick={handleClickTodayButton}>
+        Today
+      </button>
+      <button className="btn-circle btn" onClick={handleClickPrevButton}>
+        <ArrowLeft2 size="32" color="#fff" />
+      </button>
+      <button className="btn-circle btn" onClick={handleClickNextButton}>
+        <ArrowRight2 size="32" color="#fff" />
+      </button>
       <Calendar
+        ref={calendarRef}
         usageStatistics={false}
         week={{ eventView: ["time"], taskView: false, startDayOfWeek: 1 }}
         isReadOnly={true}
