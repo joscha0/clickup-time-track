@@ -82,35 +82,39 @@ const TimeCalendar: NextPage<Props> = (props) => {
   };
 
   return (
-    <div className="w-full ">
+    <div className="w-full">
       <h1 className="py-4 text-center text-3xl text-white">Calendar</h1>
-      <button className="btn" onClick={handleClickTodayButton}>
-        Today
-      </button>
-      <button className="btn-circle btn" onClick={handleClickPrevButton}>
-        <ArrowLeft2 size="32" color="#fff" />
-      </button>
-      <button className="btn-circle btn" onClick={handleClickNextButton}>
-        <ArrowRight2 size="32" color="#fff" />
-      </button>
-      <div className="dropdown">
-        <label tabIndex={0} className="btn m-1">
-          {viewText}
-        </label>
-        <ul
-          tabIndex={0}
-          className="dropdown-content menu rounded-box w-52 bg-base-100 p-2 shadow"
-        >
-          <li>
-            <a onClick={() => handleClickChangeView("day")}>Day</a>
-          </li>
-          <li>
-            <a onClick={() => handleClickChangeView("week")}>Week</a>
-          </li>
-          <li>
-            <a onClick={() => handleClickChangeView("month")}>Month</a>
-          </li>
-        </ul>
+      <div className="flex content-center justify-between bg-black">
+        <div className="flex content-center space-x-2 p-3">
+          <button className="btn" onClick={handleClickTodayButton}>
+            Today
+          </button>
+          <button className="btn-circle btn" onClick={handleClickPrevButton}>
+            <ArrowLeft2 size="32" color="#fff" />
+          </button>
+          <button className="btn-circle btn" onClick={handleClickNextButton}>
+            <ArrowRight2 size="32" color="#fff" />
+          </button>
+        </div>
+        <div className="dropdown p-3">
+          <label tabIndex={0} className="btn">
+            {viewText}
+          </label>
+          <ul
+            tabIndex={0}
+            className="dropdown-content menu rounded-box mt-1 w-52 bg-base-100 p-2 shadow"
+          >
+            <li>
+              <a onClick={() => handleClickChangeView("day")}>Day</a>
+            </li>
+            <li>
+              <a onClick={() => handleClickChangeView("week")}>Week</a>
+            </li>
+            <li>
+              <a onClick={() => handleClickChangeView("month")}>Month</a>
+            </li>
+          </ul>
+        </div>
       </div>
       <Calendar
         ref={calendarRef}
