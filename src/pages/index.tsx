@@ -71,6 +71,7 @@ const Home: NextPage = () => {
                 duration: element.duration,
               });
             });
+            newEvents.reverse();
             setEvents(newEvents);
             setCalendars(calendars);
           }
@@ -89,27 +90,39 @@ const Home: NextPage = () => {
 
       <main
         data-theme="business"
-        className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-[#02276D] to-[#151A2C]"
+        className="bg-gradient-to-b from-[#02276D] to-[#151A2C]"
       >
-        <Menu onClick={setIndex} />
-        {isLoading ? (
-          <button className="loading btn-square btn"></button>
-        ) : (
-          <div className="container flex flex-col items-center justify-center gap-12 px-4 py-8 ">
-            {index == 0 && (
-              <TimeCalendar events={events} calendars={calendars} />
-            )}
-            {index == 1 && <List events={events} teamId={teamId} />}
-            {index == 2 && (
-              <Settings
-                setApi={setApi}
-                setTeam={setTeam}
-                apiKey={apiKey}
-                teamId={teamId}
-              />
+        <div className="drawer-mobile drawer">
+          <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
+          <div className="drawer-content flex flex-col items-center justify-center">
+            <label
+              htmlFor="my-drawer-2"
+              className="btn-primary drawer-button btn lg:hidden"
+            >
+              Menu
+            </label>
+
+            {isLoading ? (
+              <button className="loading btn-square btn"></button>
+            ) : (
+              <div className="container flex flex-col items-center justify-center gap-12 px-4 py-8 ">
+                {index == 0 && (
+                  <TimeCalendar events={events} calendars={calendars} />
+                )}
+                {index == 1 && <List events={events} teamId={teamId} />}
+                {index == 2 && (
+                  <Settings
+                    setApi={setApi}
+                    setTeam={setTeam}
+                    apiKey={apiKey}
+                    teamId={teamId}
+                  />
+                )}
+              </div>
             )}
           </div>
-        )}
+          <Menu onClick={setIndex} />
+        </div>
       </main>
     </>
   );
