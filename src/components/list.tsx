@@ -1,3 +1,5 @@
+import { useMemo, useState } from "react";
+
 interface NewEvent {
   id: string;
   calendarId: string;
@@ -13,7 +15,17 @@ interface ListProps {
   teamId: string;
 }
 
+const PageSize = 10;
+
 const List = ({ events, teamId }: ListProps) => {
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const currentTableData = useMemo(() => {
+    const firstPageIndex = (currentPage - 1) * PageSize;
+    const lastPageIndex = firstPageIndex + PageSize;
+    return events.slice(firstPageIndex, lastPageIndex);
+  }, [currentPage]);
+
   return (
     <div>
       <h1 className="py-4 text-center text-3xl text-white">List</h1>
@@ -30,7 +42,7 @@ const List = ({ events, teamId }: ListProps) => {
           </thead>
           <tbody>
             {events.length > 0 &&
-              events.map((event, index) => {
+              currentTableData.map((event, index) => {
                 return (
                   <tr key={index}>
                     <td>
@@ -61,6 +73,21 @@ const List = ({ events, teamId }: ListProps) => {
               })}
           </tbody>
         </table>
+        <div className="btn-group">
+          <button
+            className="btn"
+            onClick={() => setCurrentPage(currentPage - 1)}
+          >
+            «
+          </button>
+          <button className="btn">{currentPage}</button>
+          <button
+            className="btn"
+            onClick={() => setCurrentPage(currentPage + 1)}
+          >
+            »
+          </button>
+        </div>
       </div>
     </div>
   );
