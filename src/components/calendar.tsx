@@ -24,7 +24,7 @@ interface Props {
 const TimeCalendar: NextPage<Props> = (props) => {
   const { events, calendars } = props;
 
-  var [viewText, setViewText] = useState("week");
+  const [viewText, setViewText] = useState("week");
 
   const colors = [
     "#4285F4",
