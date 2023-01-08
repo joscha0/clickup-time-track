@@ -1,4 +1,4 @@
-import { Calendar, Link2, Setting3, TableDocument } from "iconsax-react";
+import { Calendar, Setting3, TableDocument } from "iconsax-react";
 import Image from "next/image";
 
 interface MenuProps {
@@ -39,6 +39,7 @@ const Menu = ({ onClick }: MenuProps) => {
           <a
             href="https://github.com/joscha0/clickup-time-track"
             target="_blank"
+            rel="noreferrer"
           >
             <Image src="/github-mark-white.svg" alt="" width={32} height={32} />
             Github
