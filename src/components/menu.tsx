@@ -1,6 +1,5 @@
-import { faGithub } from "@fortawesome/free-brands-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Calendar, Link2, Setting3, TableDocument } from "iconsax-react";
+import Image from "next/image";
 
 interface MenuProps {
   onClick: React.Dispatch<React.SetStateAction<number>>;
@@ -41,7 +40,7 @@ const Menu = ({ onClick }: MenuProps) => {
             href="https://github.com/joscha0/clickup-time-track"
             target="_blank"
           >
-            <Link2 size="32" />
+            <Image src="/github-mark-white.svg" alt="" width={32} height={32} />
             Github
           </a>
         </li>
