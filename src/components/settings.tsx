@@ -1,3 +1,4 @@
+import { Box, Button, TextField, Typography } from "@mui/material";
 import { useRouter } from "next/router";
 import { SetStateAction } from "react";
 
@@ -29,30 +30,33 @@ const Settings = ({ setApi, setTeam, apiKey, teamId }: MenuProps) => {
   };
 
   return (
-    <div>
-      <h1 className="py-4 text-center text-3xl text-white">Settings</h1>
-      <p className="py-2 text-center">API Key</p>
-      <input
+    <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+      <Typography variant="h3">Settings</Typography>
+
+      <TextField
+        id="outlined-apikey"
+        label="API Key"
+        variant="outlined"
         type="text"
-        placeholder="API Key"
+        placeholder="pk_123456"
         onChange={handleChangeApi}
         value={apiKey}
-        className="input w-full max-w-xs"
       />
-      <p className="py-2 text-center">Team Id</p>
-      <input
+      <TextField
+        id="outlined-teamid"
+        label="Team Id"
+        variant="outlined"
         type="text"
-        placeholder="Team Id"
+        placeholder="123456"
         onChange={handleChangeTeam}
         value={teamId}
-        className="input w-full max-w-xs"
       />
-      <div className="py-2 text-center">
-        <button className="btn-primary btn" onClick={save}>
+      <Box>
+        <Button variant="contained" onClick={save}>
           SAVE
-        </button>
-      </div>
-    </div>
+        </Button>
+      </Box>
+    </Box>
   );
 };
 
