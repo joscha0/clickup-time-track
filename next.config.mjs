@@ -7,19 +7,32 @@
 
 
 import nextPWA from "next-pwa";
+import withBundleAnalyzer from "@next/bundle-analyzer";
 
 const withPWA = nextPWA({
 	dest: "public",
+  disable: process.env.NODE_ENV === "development",
 });
 
 
-const config = {
+/**
+ * @template {import('next').NextConfig} T
+ * @param {T} config - A generic parameter that flows through the return type
+ * @constraint {{import('next').NextConfig}}
+ */
+function defineNextConfig(config) {
+	return config;
+}
+
+const nextConfig = defineNextConfig({
   reactStrictMode: true,
   swcMinify: true,
   i18n: {
     locales: ["en"],
     defaultLocale: "en",
   },
-};
+});
 
-export default withPWA(config);
+export default withPWA(withBundleAnalyzer({
+	enabled: process.env.ANALYZE === "true",
+})(nextConfig));
