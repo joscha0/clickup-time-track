@@ -80,11 +80,13 @@ const List = ({ events, teamId }: ListProps) => {
         sx={{ border: 0 }}
         rows={events}
         columns={columns}
+        pageSize={50}
         components={{
           Toolbar: () => (
             <GridToolbarContainer
               sx={{
-                pl: { xs: 8, sm: 0 },
+                p: 1,
+                pl: { xs: 8, sm: 1 },
                 justifyContent: "space-between",
               }}
             >
