@@ -1,3 +1,10 @@
+import { Box, Link } from "@mui/material";
+import {
+  DataGrid,
+  GridColDef,
+  GridRowsProp,
+  GridToolbar,
+} from "@mui/x-data-grid";
 import { useMemo, useState } from "react";
 
 interface NewEvent {
@@ -26,70 +33,58 @@ const List = ({ events, teamId }: ListProps) => {
     return events.slice(firstPageIndex, lastPageIndex);
   }, [currentPage]);
 
+  const columns: GridColDef[] = [
+    {
+      field: "calendarId",
+      headerName: "Space",
+      width: 150,
+      renderCell: (params) => (
+        <Link
+          href={"https://app.clickup.com/" + teamId + "/v/l/s/" + params.value}
+          target="_blank"
+          rel="noreferrer"
+        >
+          {params.value}{" "}
+        </Link>
+      ),
+    },
+    { field: "title", headerName: "Task", width: 350 },
+    {
+      field: "start",
+      headerName: "Start",
+      width: 250,
+      valueFormatter: ({ value }) => new Date(value).toLocaleString(),
+    },
+    {
+      field: "end",
+      headerName: "End",
+      width: 250,
+      valueFormatter: ({ value }) => new Date(value).toLocaleString(),
+    },
+    {
+      field: "duration",
+      headerName: "Duration",
+      width: 150,
+      valueFormatter: ({ value }) =>
+        new Date(parseInt(value)).toISOString().slice(11, -5),
+    },
+  ];
+
   return (
-    <div>
-      <h1 className="py-4 text-center text-3xl text-white">List</h1>
-      <div className="overflow-x-auto">
-        <table className="table w-full">
-          <thead>
-            <tr>
-              <th>Space</th>
-              <th>Task</th>
-              <th>Start</th>
-              <th>End</th>
-              <th>Duration</th>
-            </tr>
-          </thead>
-          <tbody>
-            {events.length > 0 &&
-              currentTableData.map((event, index) => {
-                return (
-                  <tr key={index}>
-                    <td>
-                      <a
-                        className="link"
-                        href={
-                          "https://app.clickup.com/" +
-                          teamId +
-                          "/v/l/s/" +
-                          event.calendarId
-                        }
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        {event.calendarId}
-                      </a>
-                    </td>
-                    <td>{event.title}</td>
-                    <td>{new Date(event.start).toLocaleString()}</td>
-                    <td>{new Date(event.end).toLocaleString()}</td>
-                    <td>
-                      {new Date(parseInt(event.duration))
-                        .toISOString()
-                        .slice(11, -5)}
-                    </td>
-                  </tr>
-                );
-              })}
-          </tbody>
-        </table>
-        <div className="btn-group">
-          <button
-            className="btn"
-            onClick={() => setCurrentPage(currentPage - 1)}
-          >
-            «
-          </button>
-          <button className="btn">{currentPage}</button>
-          <button
-            className="btn"
-            onClick={() => setCurrentPage(currentPage + 1)}
-          >
-            »
-          </button>
-        </div>
-      </div>
-    </div>
+    <Box sx={{ height: "100%", width: "100%" }}>
+      <DataGrid
+        sx={{ border: 0 }}
+        rows={events}
+        columns={columns}
+        components={{ Toolbar: GridToolbar }}
+        componentsProps={{
+          toolbar: {
+            showQuickFilter: true,
+            quickFilterProps: { debounceMs: 500 },
+          },
+        }}
+      />
+    </Box>
   );
 };
 
