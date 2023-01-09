@@ -31,7 +31,7 @@ const ResponsiveDrawer = ({ drawerWidth }: Props) => {
   };
 
   const drawer = (
-    <div>
+    <Box onClick={handleDrawerToggle}>
       <List
         sx={{
           display: "flex",
@@ -88,7 +88,7 @@ const ResponsiveDrawer = ({ drawerWidth }: Props) => {
           </ListItemButton>
         </ListItem>
       </List>
-    </div>
+    </Box>
   );
 
   return (
@@ -96,6 +96,7 @@ const ResponsiveDrawer = ({ drawerWidth }: Props) => {
       <Box
         position="fixed"
         sx={{
+          zIndex: 999,
           width: { sm: `calc(100% - ${drawerWidth}px)` },
           ml: { sm: `${drawerWidth}px` },
         }}

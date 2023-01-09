@@ -1,9 +1,15 @@
-import { Box, Link } from "@mui/material";
+import { Box, Divider, Link } from "@mui/material";
 import {
   DataGrid,
   GridColDef,
   GridRowsProp,
   GridToolbar,
+  GridToolbarColumnsButton,
+  GridToolbarContainer,
+  GridToolbarDensitySelector,
+  GridToolbarExport,
+  GridToolbarFilterButton,
+  GridToolbarQuickFilter,
 } from "@mui/x-data-grid";
 import { useMemo, useState } from "react";
 
@@ -48,7 +54,14 @@ const List = ({ events, teamId }: ListProps) => {
         </Link>
       ),
     },
-    { field: "title", headerName: "Task", width: 350 },
+    {
+      field: "duration",
+      headerName: "Duration",
+      width: 150,
+      valueFormatter: ({ value }) =>
+        new Date(parseInt(value)).toISOString().slice(11, -5),
+    },
+    { field: "title", headerName: "Task", flex: 1, minWidth: 350 },
     {
       field: "start",
       headerName: "Start",
@@ -61,13 +74,6 @@ const List = ({ events, teamId }: ListProps) => {
       width: 250,
       valueFormatter: ({ value }) => new Date(value).toLocaleString(),
     },
-    {
-      field: "duration",
-      headerName: "Duration",
-      width: 150,
-      valueFormatter: ({ value }) =>
-        new Date(parseInt(value)).toISOString().slice(11, -5),
-    },
   ];
 
   return (
@@ -76,7 +82,24 @@ const List = ({ events, teamId }: ListProps) => {
         sx={{ border: 0 }}
         rows={events}
         columns={columns}
-        components={{ Toolbar: GridToolbar }}
+        components={{
+          Toolbar: () => (
+            <GridToolbarContainer
+              sx={{
+                pl: { xs: 8, sm: 0 },
+                justifyContent: "space-between",
+              }}
+            >
+              <Box>
+                <GridToolbarColumnsButton />
+                <GridToolbarFilterButton />
+                <GridToolbarDensitySelector />
+                <GridToolbarExport />
+              </Box>
+              <GridToolbarQuickFilter />
+            </GridToolbarContainer>
+          ),
+        }}
         componentsProps={{
           toolbar: {
             showQuickFilter: true,
