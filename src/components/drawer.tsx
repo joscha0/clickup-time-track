@@ -97,6 +97,7 @@ const ResponsiveDrawer = ({ drawerWidth }: Props) => {
         position="fixed"
         sx={{
           zIndex: 999,
+          display: { sm: "none" },
           width: { sm: `calc(100% - ${drawerWidth}px)` },
           ml: { sm: `${drawerWidth}px` },
         }}
@@ -107,7 +108,7 @@ const ResponsiveDrawer = ({ drawerWidth }: Props) => {
             aria-label="open drawer"
             edge="start"
             onClick={handleDrawerToggle}
-            sx={{ mr: 2, display: { sm: "none" } }}
+            sx={{ mr: 2 }}
           >
             <MenuIcon />
           </IconButton>
