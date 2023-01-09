@@ -19,6 +19,8 @@ import {
   Typography,
 } from "@mui/material";
 import Link from "next/link";
+import Image from "next/image";
+
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 
@@ -62,7 +64,19 @@ const ResponsiveDrawer = ({ drawerWidth, toggleTheme, isDarkTheme }: Props) => {
           height: "100vh",
         }}
       >
-        <List>
+        <List disablePadding>
+          <Box>
+            <Box
+              sx={{ display: "flex", py: 3, gap: 1, justifyContent: "center" }}
+            >
+              <Image src="/logo.png" alt="logo" width={42} height={42} />
+              <Box>
+                <Typography fontWeight="bold">ClickUp</Typography>
+                <Typography>Time Track</Typography>
+              </Box>
+            </Box>
+            <Divider />
+          </Box>
           <ListItem disablePadding>
             <ListItemButton
               selected={currentPage === "/"}
