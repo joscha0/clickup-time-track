@@ -93,7 +93,7 @@ const ResponsiveDrawer = ({ drawerWidth }: Props) => {
 
   return (
     <Box>
-      <AppBar
+      <Box
         position="fixed"
         sx={{
           width: { sm: `calc(100% - ${drawerWidth}px)` },
@@ -110,11 +110,8 @@ const ResponsiveDrawer = ({ drawerWidth }: Props) => {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap component="div">
-            ClickUp Time Track
-          </Typography>
         </Toolbar>
-      </AppBar>
+      </Box>
       <Box
         component="nav"
         sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}

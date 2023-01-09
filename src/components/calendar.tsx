@@ -10,6 +10,7 @@ import {
   Button,
   Fab,
   FormControl,
+  IconButton,
   InputLabel,
   MenuItem,
   Select,
@@ -94,14 +95,14 @@ const TimeCalendar: NextPage<Props> = (props) => {
   };
 
   return (
-    <Box sx={{ width: "100%" }}>
-      <h1 className="py-4 text-center text-3xl text-white">Calendar</h1>
+    <Box sx={{ width: "100%", height: "100%" }}>
       <Box
         sx={{
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
           px: 2,
+          height: 60,
         }}
       >
         <Box
@@ -111,23 +112,24 @@ const TimeCalendar: NextPage<Props> = (props) => {
             gap: 1,
           }}
         >
+          <Box sx={{ width: 40, display: { xs: "block", sm: "none" } }}></Box>
           <Button variant="contained" onClick={handleClickTodayButton}>
             Today
           </Button>
-          <Fab size="small" aria-label="last" onClick={handleClickPrevButton}>
-            <ChevronLeft />
-          </Fab>
-          <Fab size="small" aria-label="next" onClick={handleClickNextButton}>
-            <ChevronRight />
-          </Fab>
+          <Box>
+            <IconButton aria-label="last" onClick={handleClickPrevButton}>
+              <ChevronLeft />
+            </IconButton>
+            <IconButton aria-label="next" onClick={handleClickNextButton}>
+              <ChevronRight />
+            </IconButton>
+          </Box>
         </Box>
-        <FormControl>
-          <InputLabel id="demo-simple-select-label">View</InputLabel>
+        <FormControl sx={{ m: 1, minWidth: 100 }} size="small">
           <Select
             labelId="demo-simple-select-label"
             id="demo-simple-select"
             value={viewText}
-            label="View"
             onChange={handleClickChangeView}
           >
             <MenuItem value={"day"}>Day</MenuItem>
@@ -138,8 +140,13 @@ const TimeCalendar: NextPage<Props> = (props) => {
       </Box>
       <Calendar
         ref={calendarRef}
+        height="calc(100% - 60px)"
         usageStatistics={false}
-        week={{ eventView: ["time"], taskView: false, startDayOfWeek: 1 }}
+        week={{
+          eventView: ["time"],
+          taskView: false,
+          startDayOfWeek: 1,
+        }}
         isReadOnly={true}
         view={"week"}
         calendars={newCalendars}
