@@ -13,7 +13,6 @@ export const getEventsData = async (apiKeyReq: string, teamIdReq: string) => {
     // navigate login
     return;
   } else {
-    console.log(apiKeyReq);
     const res = await fetch(
       `https://cors.960.eu/api.clickup.com/api/v2/team/${teamIdReq}/time_entries`,
       {
@@ -26,7 +25,6 @@ export const getEventsData = async (apiKeyReq: string, teamIdReq: string) => {
       }
     );
     const data = await res.json();
-    console.log(data.data);
     if (data.data !== undefined) {
       const calendars: string[] = [];
       const newEvents: NewEvent[] = [];
