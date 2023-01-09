@@ -5,6 +5,17 @@ import Calendar from "@toast-ui/react-calendar";
 import "@toast-ui/calendar/dist/toastui-calendar.min.css";
 import React, { useState } from "react";
 import { ArrowLeft2, ArrowRight2 } from "iconsax-react";
+import {
+  Box,
+  Button,
+  Fab,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  SelectChangeEvent,
+} from "@mui/material";
+import { ArrowLeft, ChevronLeft, ChevronRight } from "@mui/icons-material";
 
 interface NewEvent {
   id: string;
@@ -71,7 +82,8 @@ const TimeCalendar: NextPage<Props> = (props) => {
   };
 
   type ViewType = "month" | "week" | "day";
-  const handleClickChangeView = (view: ViewType) => {
+  const handleClickChangeView = (event: SelectChangeEvent) => {
+    const view = event.target.value as ViewType;
     if (calendarRef.current) {
       const calendarInstance = calendarRef.current.getInstance();
       if (calendarInstance) {
@@ -82,40 +94,48 @@ const TimeCalendar: NextPage<Props> = (props) => {
   };
 
   return (
-    <div className="w-full">
+    <Box sx={{ width: "100%" }}>
       <h1 className="py-4 text-center text-3xl text-white">Calendar</h1>
-      <div className="flex content-center justify-between bg-black">
-        <div className="flex content-center space-x-2 p-3">
-          <button className="btn" onClick={handleClickTodayButton}>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          px: 2,
+        }}
+      >
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            gap: 1,
+          }}
+        >
+          <Button variant="contained" onClick={handleClickTodayButton}>
             Today
-          </button>
-          <button className="btn-circle btn" onClick={handleClickPrevButton}>
-            <ArrowLeft2 size="32" color="#fff" />
-          </button>
-          <button className="btn-circle btn" onClick={handleClickNextButton}>
-            <ArrowRight2 size="32" color="#fff" />
-          </button>
-        </div>
-        <div className="dropdown p-3">
-          <label tabIndex={0} className="btn">
-            {viewText}
-          </label>
-          <ul
-            tabIndex={0}
-            className="dropdown-content menu rounded-box mt-1 w-52 bg-base-100 p-2 shadow"
+          </Button>
+          <Fab size="small" aria-label="last" onClick={handleClickPrevButton}>
+            <ChevronLeft />
+          </Fab>
+          <Fab size="small" aria-label="next" onClick={handleClickNextButton}>
+            <ChevronRight />
+          </Fab>
+        </Box>
+        <FormControl>
+          <InputLabel id="demo-simple-select-label">View</InputLabel>
+          <Select
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            value={viewText}
+            label="View"
+            onChange={handleClickChangeView}
           >
-            <li>
-              <a onClick={() => handleClickChangeView("day")}>Day</a>
-            </li>
-            <li>
-              <a onClick={() => handleClickChangeView("week")}>Week</a>
-            </li>
-            <li>
-              <a onClick={() => handleClickChangeView("month")}>Month</a>
-            </li>
-          </ul>
-        </div>
-      </div>
+            <MenuItem value={"day"}>Day</MenuItem>
+            <MenuItem value={"week"}>Week</MenuItem>
+            <MenuItem value={"month"}>Month</MenuItem>
+          </Select>
+        </FormControl>
+      </Box>
       <Calendar
         ref={calendarRef}
         usageStatistics={false}
@@ -162,7 +182,7 @@ const TimeCalendar: NextPage<Props> = (props) => {
           },
         }}
       />
-    </div>
+    </Box>
   );
 };
 
