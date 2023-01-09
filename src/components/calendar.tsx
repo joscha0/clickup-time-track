@@ -1,6 +1,6 @@
 /* Calendar.tsx component */
 
-import { NextPage } from "next";
+import { type NextPage } from "next";
 import Calendar from "@toast-ui/react-calendar";
 import "@toast-ui/calendar/dist/toastui-calendar.min.css";
 import React, { useState } from "react";
@@ -11,7 +11,7 @@ import {
   IconButton,
   MenuItem,
   Select,
-  SelectChangeEvent,
+  type SelectChangeEvent,
   useTheme,
 } from "@mui/material";
 import { ChevronLeft, ChevronRight } from "@mui/icons-material";

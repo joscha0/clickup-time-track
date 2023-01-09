@@ -14,7 +14,6 @@ import {
   List,
   Drawer,
   Box,
-  AppBar,
   IconButton,
   Typography,
 } from "@mui/material";
@@ -52,7 +51,7 @@ const ResponsiveDrawer = ({ drawerWidth, toggleTheme, isDarkTheme }: Props) => {
     return () => {
       router.events.off("routeChangeStart", handleRouteChange);
     };
-  }, []);
+  }, [router]);
 
   const drawer = (
     <Box onClick={handleDrawerToggle}>

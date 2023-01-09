@@ -1,7 +1,7 @@
 import { Box, Link } from "@mui/material";
 import {
   DataGrid,
-  GridColDef,
+  type GridColDef,
   GridToolbarColumnsButton,
   GridToolbarContainer,
   GridToolbarDensitySelector,
@@ -9,34 +9,14 @@ import {
   GridToolbarFilterButton,
   GridToolbarQuickFilter,
 } from "@mui/x-data-grid";
-import { useMemo, useState } from "react";
-
-interface NewEvent {
-  id: string;
-  calendarId: string;
-  title: string;
-  start: string;
-  end: string;
-  category: string;
-  duration: string;
-}
+import type { NewEvent } from "../services/api";
 
 interface ListProps {
   events: NewEvent[];
   teamId: string;
 }
 
-const PageSize = 10;
-
 const List = ({ events, teamId }: ListProps) => {
-  const [currentPage, setCurrentPage] = useState(1);
-
-  const currentTableData = useMemo(() => {
-    const firstPageIndex = (currentPage - 1) * PageSize;
-    const lastPageIndex = firstPageIndex + PageSize;
-    return events.slice(firstPageIndex, lastPageIndex);
-  }, [currentPage]);
-
   const columns: GridColDef[] = [
     {
       field: "calendarId",

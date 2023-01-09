@@ -1,7 +1,7 @@
 import { Box, CircularProgress } from "@mui/material";
-import { NextPage } from "next";
+import type { NextPage } from "next";
 import { useEffect, useState } from "react";
-import { getEventsData, NewEvent } from "../services/api";
+import { getEventsData, type NewEvent } from "../services/api";
 import List from "../components/list";
 import Head from "next/head";
 

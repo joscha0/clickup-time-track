@@ -1,7 +1,7 @@
 import { Box, CircularProgress } from "@mui/material";
-import { NextPage } from "next";
+import type { NextPage } from "next";
 import { useEffect, useState } from "react";
-import { getEventsData, NewEvent } from "../services/api";
+import { getEventsData, type NewEvent } from "../services/api";
 import dynamic from "next/dynamic";
 import Head from "next/head";
 const TimeCalendar = dynamic(() => import("../components/calendar"), {

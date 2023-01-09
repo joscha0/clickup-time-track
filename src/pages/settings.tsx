@@ -1,5 +1,5 @@
 import { Box, CircularProgress } from "@mui/material";
-import { NextPage } from "next";
+import type { NextPage } from "next";
 import Head from "next/head";
 import { useEffect, useState } from "react";
 import Settings from "../components/settings";

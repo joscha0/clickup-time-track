@@ -1,6 +1,6 @@
 import { Box, Button, TextField, Typography } from "@mui/material";
 import { useRouter } from "next/router";
-import { SetStateAction } from "react";
+import type { SetStateAction } from "react";
 
 interface MenuProps {
   setApi: React.Dispatch<React.SetStateAction<string>>;
