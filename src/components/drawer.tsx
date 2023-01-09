@@ -22,6 +22,7 @@ import Image from "next/image";
 
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
+import { BoxSearch } from "iconsax-react";
 
 interface Props {
   drawerWidth: number;
@@ -55,7 +56,7 @@ const ResponsiveDrawer = ({ drawerWidth, toggleTheme, isDarkTheme }: Props) => {
 
   const drawer = (
     <Box onClick={handleDrawerToggle}>
-      <List
+      <Box
         sx={{
           display: "flex",
           flexDirection: "column",
@@ -64,7 +65,7 @@ const ResponsiveDrawer = ({ drawerWidth, toggleTheme, isDarkTheme }: Props) => {
         }}
       >
         <List disablePadding>
-          <Box>
+          <ListItem>
             <Box
               sx={{ display: "flex", py: 3, gap: 1, justifyContent: "center" }}
             >
@@ -75,7 +76,7 @@ const ResponsiveDrawer = ({ drawerWidth, toggleTheme, isDarkTheme }: Props) => {
               </Box>
             </Box>
             <Divider />
-          </Box>
+          </ListItem>
           <ListItem disablePadding>
             <ListItemButton
               selected={currentPage === "/"}
@@ -126,19 +127,23 @@ const ResponsiveDrawer = ({ drawerWidth, toggleTheme, isDarkTheme }: Props) => {
           </ListItem>
         </List>
         <Box sx={{ display: "flex", justifyContent: "space-around" }}>
-          <IconButton onClick={toggleTheme}>
+          <IconButton
+            onClick={toggleTheme}
+            aria-label="toggle Dark and Light theme mode"
+          >
             {isDarkTheme ? <LightModeIcon /> : <DarkModeIcon />}
           </IconButton>
           <IconButton
             component={Link}
             href="https://github.com/joscha0/clickup-time-track"
             target="_blank"
+            aria-label="GitHub"
             rel="noreferrer"
           >
             <GitHub />
           </IconButton>
         </Box>
-      </List>
+      </Box>
     </Box>
   );
 
