@@ -5,14 +5,14 @@ import "../styles/globals.css";
 import CssBaseline from "@mui/material/CssBaseline";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import React, { useState } from "react";
-import { AppBar, Box, IconButton, Toolbar, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 import ResponsiveDrawer from "../components/drawer";
 
 const darkTheme = createTheme({
   palette: {
     mode: "dark",
     primary: {
-      main: "#0640AB",
+      main: "#3373E3",
     },
   },
   typography: {
@@ -23,15 +23,15 @@ const darkTheme = createTheme({
     MuiCssBaseline: {
       styleOverrides: {
         body: {
-          scrollbarColor: "#6b6b6b #2b2b2b",
+          scrollbarColor: "#2b2b2b #121212",
           "&::-webkit-scrollbar, & *::-webkit-scrollbar": {
-            backgroundColor: "#2b2b2b",
+            backgroundColor: "#121212",
           },
           "&::-webkit-scrollbar-thumb, & *::-webkit-scrollbar-thumb": {
             borderRadius: 8,
-            backgroundColor: "#6b6b6b",
+            backgroundColor: "#2b2b2b",
             minHeight: 24,
-            border: "3px solid #2b2b2b",
+            border: "3px solid #121212",
           },
           "&::-webkit-scrollbar-thumb:focus, & *::-webkit-scrollbar-thumb:focus":
             {
@@ -46,7 +46,7 @@ const darkTheme = createTheme({
               backgroundColor: "#959595",
             },
           "&::-webkit-scrollbar-corner, & *::-webkit-scrollbar-corner": {
-            backgroundColor: "#2b2b2b",
+            backgroundColor: "#121212",
           },
         },
       },
@@ -58,7 +58,7 @@ const lightTheme = createTheme({
   palette: {
     mode: "light",
     primary: {
-      main: "#0640AB",
+      main: "#3373E3",
     },
   },
   typography: {
@@ -115,7 +115,11 @@ const MyApp: AppType = ({ Component, pageProps }) => {
     <ThemeProvider theme={isDarkTheme ? darkTheme : lightTheme}>
       <Box sx={{ display: "flex" }}>
         <CssBaseline />
-        <ResponsiveDrawer drawerWidth={drawerWidth} />
+        <ResponsiveDrawer
+          drawerWidth={drawerWidth}
+          isDarkTheme={isDarkTheme}
+          toggleTheme={toggleTheme}
+        />
         <Box
           component="main"
           sx={{

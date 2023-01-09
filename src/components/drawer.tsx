@@ -1,6 +1,8 @@
 import { CalendarMonth, GitHub, Settings } from "@mui/icons-material";
 import ListIcon from "@mui/icons-material/List";
 import MenuIcon from "@mui/icons-material/Menu";
+import LightModeIcon from "@mui/icons-material/LightMode";
+import DarkModeIcon from "@mui/icons-material/DarkMode";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import {
   Toolbar,
@@ -22,9 +24,11 @@ import { useRouter } from "next/router";
 
 interface Props {
   drawerWidth: number;
+  toggleTheme: () => void;
+  isDarkTheme: boolean;
 }
 
-const ResponsiveDrawer = ({ drawerWidth }: Props) => {
+const ResponsiveDrawer = ({ drawerWidth, toggleTheme, isDarkTheme }: Props) => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState("");
   const router = useRouter();
@@ -108,20 +112,19 @@ const ResponsiveDrawer = ({ drawerWidth }: Props) => {
             </ListItemButton>
           </ListItem>
         </List>
-
-        <ListItem disablePadding>
-          <ListItemButton
+        <Box sx={{ display: "flex", justifyContent: "space-around" }}>
+          <IconButton onClick={toggleTheme}>
+            {isDarkTheme ? <LightModeIcon /> : <DarkModeIcon />}
+          </IconButton>
+          <IconButton
             component={Link}
             href="https://github.com/joscha0/clickup-time-track"
             target="_blank"
             rel="noreferrer"
           >
-            <ListItemIcon>
-              <GitHub />
-            </ListItemIcon>
-            <ListItemText primary="Github" />
-          </ListItemButton>
-        </ListItem>
+            <GitHub />
+          </IconButton>
+        </Box>
       </List>
     </Box>
   );

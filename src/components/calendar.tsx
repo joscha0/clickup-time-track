@@ -12,6 +12,7 @@ import {
   MenuItem,
   Select,
   SelectChangeEvent,
+  useTheme,
 } from "@mui/material";
 import { ChevronLeft, ChevronRight } from "@mui/icons-material";
 
@@ -33,6 +34,8 @@ interface Props {
 const TimeCalendar: NextPage<Props> = (props) => {
   const { events, calendars } = props;
 
+  const theme = useTheme();
+
   const [viewText, setViewText] = useState("week");
 
   const colors = [
@@ -49,8 +52,11 @@ const TimeCalendar: NextPage<Props> = (props) => {
     return { id: calendar, name: calendar, backgroundColor: color };
   });
 
+  const primaryColor = "#3373E3";
   const backgroundColor = "#121212";
   const borderColor = "1px solid #2f2f2f";
+  const backgroundColorLight = "#fff";
+  const borderColorLight = "1px solid #e5e5e5";
 
   const calendarRef = React.createRef<Calendar>();
 
@@ -110,9 +116,7 @@ const TimeCalendar: NextPage<Props> = (props) => {
           }}
         >
           <Box sx={{ width: 40, display: { xs: "block", sm: "none" } }}></Box>
-          <Button variant="contained" onClick={handleClickTodayButton}>
-            Today
-          </Button>
+          <Button onClick={handleClickTodayButton}>Today</Button>
           <Box>
             <IconButton aria-label="last" onClick={handleClickPrevButton}>
               <ChevronLeft />
@@ -148,43 +152,101 @@ const TimeCalendar: NextPage<Props> = (props) => {
         view={"week"}
         calendars={newCalendars}
         events={events}
-        theme={{
-          common: {
-            backgroundColor: backgroundColor,
-            border: borderColor,
-            holiday: {
-              color: "#fff",
-            },
-            saturday: {
-              color: "#fff",
-            },
-          },
-          week: {
-            today: {
-              color: "#575ae7",
-            },
-            dayName: {
-              borderLeft: borderColor,
-              borderTop: borderColor,
-              borderBottom: borderColor,
-            },
-            timeGrid: {
-              borderRight: borderColor,
-            },
-            timeGridLeft: {
-              borderRight: borderColor,
-            },
-            timeGridHalfHourLine: {
-              borderBottom: "1px solid #2F2F2F59",
-            },
-            timeGridHourLine: {
-              borderBottom: borderColor,
-            },
-            futureTime: {
-              color: "#b8b8b8",
-            },
-          },
-        }}
+        theme={
+          theme.palette.mode === "dark"
+            ? {
+                common: {
+                  backgroundColor: backgroundColor,
+                  border: borderColor,
+                  holiday: {
+                    color: "#fff",
+                  },
+                },
+                week: {
+                  today: {
+                    color: primaryColor,
+                  },
+                  nowIndicatorLabel: {
+                    color: primaryColor,
+                  },
+                  nowIndicatorToday: {
+                    border: "1px solid " + primaryColor,
+                  },
+                  nowIndicatorPast: {
+                    border: "1px dashed " + primaryColor,
+                  },
+                  nowIndicatorBullet: {
+                    backgroundColor: primaryColor,
+                  },
+                  dayName: {
+                    borderLeft: borderColor,
+                    borderTop: borderColor,
+                    borderBottom: borderColor,
+                  },
+                  timeGrid: {
+                    borderRight: borderColor,
+                  },
+                  timeGridLeft: {
+                    borderRight: borderColor,
+                  },
+                  timeGridHalfHourLine: {
+                    borderBottom: "1px solid #2F2F2F59",
+                  },
+                  timeGridHourLine: {
+                    borderBottom: borderColor,
+                  },
+                  futureTime: {
+                    color: "#fff",
+                  },
+                },
+              }
+            : {
+                common: {
+                  backgroundColor: backgroundColorLight,
+                  border: borderColorLight,
+                  holiday: {
+                    color: "#000",
+                  },
+                },
+                week: {
+                  today: {
+                    color: primaryColor,
+                  },
+                  nowIndicatorLabel: {
+                    color: primaryColor,
+                  },
+                  nowIndicatorToday: {
+                    border: "1px solid " + primaryColor,
+                  },
+                  nowIndicatorPast: {
+                    border: "1px dashed " + primaryColor,
+                  },
+                  nowIndicatorBullet: {
+                    backgroundColor: primaryColor,
+                  },
+                  dayName: {
+                    borderLeft: borderColorLight,
+                    borderTop: borderColorLight,
+                    borderBottom: borderColorLight,
+                  },
+                  timeGrid: {
+                    borderRight: borderColorLight,
+                  },
+                  timeGridLeft: {
+                    borderRight: borderColorLight,
+                  },
+                  timeGridHalfHourLine: {
+                    borderBottom: "1px solid #2F2F2F59",
+                  },
+                  timeGridHourLine: {
+                    borderBottom: borderColorLight,
+                  },
+                  futureTime: {
+                    color: "#000",
+                  },
+                },
+              }
+        }
       />
     </Box>
   );
