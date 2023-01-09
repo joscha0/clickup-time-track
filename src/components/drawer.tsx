@@ -40,40 +40,58 @@ const ResponsiveDrawer = ({ drawerWidth }: Props) => {
           height: "100vh",
         }}
       >
-        <List>
-          <ListItem disablePadding>
-            <ListItemButton component={Link} href="/">
-              <ListItemIcon>
-                <DashboardIcon />
-              </ListItemIcon>
-              <ListItemText primary="Dashboard" />
-            </ListItemButton>
-          </ListItem>
-          <ListItem disablePadding>
-            <ListItemButton component={Link} href="/calendar">
-              <ListItemIcon>
-                <CalendarMonth />
-              </ListItemIcon>
-              <ListItemText primary="Calendar" />
-            </ListItemButton>
-          </ListItem>
-          <ListItem disablePadding>
-            <ListItemButton component={Link} href="/list">
-              <ListItemIcon>
-                <ListIcon />
-              </ListItemIcon>
-              <ListItemText primary="List" />
-            </ListItemButton>
-          </ListItem>
-          <ListItem disablePadding>
-            <ListItemButton component={Link} href="/settings">
-              <ListItemIcon>
-                <Settings />
-              </ListItemIcon>
-              <ListItemText primary="Settings" />
-            </ListItemButton>
-          </ListItem>
-        </List>
+        {window !== undefined && (
+          <List>
+            <ListItem disablePadding>
+              <ListItemButton
+                selected={window.location.pathname === "/"}
+                component={Link}
+                href="/"
+              >
+                <ListItemIcon>
+                  <DashboardIcon />
+                </ListItemIcon>
+                <ListItemText primary="Dashboard" />
+              </ListItemButton>
+            </ListItem>
+            <ListItem disablePadding>
+              <ListItemButton
+                selected={window.location.pathname === "/calendar"}
+                component={Link}
+                href="/calendar"
+              >
+                <ListItemIcon>
+                  <CalendarMonth />
+                </ListItemIcon>
+                <ListItemText primary="Calendar" />
+              </ListItemButton>
+            </ListItem>
+            <ListItem disablePadding>
+              <ListItemButton
+                selected={window.location.pathname === "/list"}
+                component={Link}
+                href="/list"
+              >
+                <ListItemIcon>
+                  <ListIcon />
+                </ListItemIcon>
+                <ListItemText primary="List" />
+              </ListItemButton>
+            </ListItem>
+            <ListItem disablePadding>
+              <ListItemButton
+                selected={window.location.pathname === "/settings"}
+                component={Link}
+                href="/settings"
+              >
+                <ListItemIcon>
+                  <Settings />
+                </ListItemIcon>
+                <ListItemText primary="Settings" />
+              </ListItemButton>
+            </ListItem>
+          </List>
+        )}
         <ListItem disablePadding>
           <ListItemButton
             component={Link}
