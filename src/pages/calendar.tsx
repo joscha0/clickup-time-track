@@ -3,6 +3,7 @@ import { NextPage } from "next";
 import { useEffect, useState } from "react";
 import { getEventsData, NewEvent } from "../services/api";
 import dynamic from "next/dynamic";
+import Head from "next/head";
 const TimeCalendar = dynamic(() => import("../components/calendar"), {
   ssr: false,
 });
@@ -28,20 +29,30 @@ const Calendar: NextPage = () => {
     });
   }, []);
   return (
-    <Box
-      sx={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        height: "100vh",
-      }}
-    >
-      {isLoading ? (
-        <CircularProgress />
-      ) : (
-        <TimeCalendar events={events} calendars={calendars} />
-      )}
-    </Box>
+    <>
+      <Head>
+        <title>CUTT - Calendar</title>
+        <meta
+          property="og:title"
+          content="ClickUp Time Track - Calendar"
+          key="title"
+        />
+      </Head>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100vh",
+        }}
+      >
+        {isLoading ? (
+          <CircularProgress />
+        ) : (
+          <TimeCalendar events={events} calendars={calendars} />
+        )}
+      </Box>
+    </>
   );
 };
 

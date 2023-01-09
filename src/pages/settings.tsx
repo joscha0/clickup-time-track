@@ -1,5 +1,6 @@
 import { Box, CircularProgress } from "@mui/material";
 import { NextPage } from "next";
+import Head from "next/head";
 import { useEffect, useState } from "react";
 import Settings from "../components/settings";
 
@@ -17,25 +18,35 @@ const SettingsPage: NextPage = () => {
     setLoading(false);
   }, []);
   return (
-    <Box
-      sx={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        height: "100vh",
-      }}
-    >
-      {isLoading ? (
-        <CircularProgress />
-      ) : (
-        <Settings
-          setApi={setApi}
-          setTeam={setTeam}
-          apiKey={apiKey}
-          teamId={teamId}
+    <>
+      <Head>
+        <title>CUTT - Settings</title>
+        <meta
+          property="og:title"
+          content="ClickUp Time Track - Settings"
+          key="title"
         />
-      )}
-    </Box>
+      </Head>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100vh",
+        }}
+      >
+        {isLoading ? (
+          <CircularProgress />
+        ) : (
+          <Settings
+            setApi={setApi}
+            setTeam={setTeam}
+            apiKey={apiKey}
+            teamId={teamId}
+          />
+        )}
+      </Box>
+    </>
   );
 };
 
