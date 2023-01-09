@@ -17,18 +17,36 @@ import {
   Typography,
 } from "@mui/material";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 
 interface Props {
   drawerWidth: number;
 }
 
 const ResponsiveDrawer = ({ drawerWidth }: Props) => {
-  const [mobileOpen, setMobileOpen] = React.useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [currentPage, setCurrentPage] = useState("");
+  const router = useRouter();
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
+
+  useEffect(() => {
+    setCurrentPage(router.asPath);
+    const handleRouteChange = (url: string) => {
+      setCurrentPage(url);
+    };
+
+    router.events.on("routeChangeStart", handleRouteChange);
+
+    // If the component is unmounted, unsubscribe
+    // from the event with the `off` method:
+    return () => {
+      router.events.off("routeChangeStart", handleRouteChange);
+    };
+  }, []);
 
   const drawer = (
     <Box onClick={handleDrawerToggle}>
@@ -40,58 +58,57 @@ const ResponsiveDrawer = ({ drawerWidth }: Props) => {
           height: "100vh",
         }}
       >
-        {window !== undefined && (
-          <List>
-            <ListItem disablePadding>
-              <ListItemButton
-                selected={window.location.pathname === "/"}
-                component={Link}
-                href="/"
-              >
-                <ListItemIcon>
-                  <DashboardIcon />
-                </ListItemIcon>
-                <ListItemText primary="Dashboard" />
-              </ListItemButton>
-            </ListItem>
-            <ListItem disablePadding>
-              <ListItemButton
-                selected={window.location.pathname === "/calendar"}
-                component={Link}
-                href="/calendar"
-              >
-                <ListItemIcon>
-                  <CalendarMonth />
-                </ListItemIcon>
-                <ListItemText primary="Calendar" />
-              </ListItemButton>
-            </ListItem>
-            <ListItem disablePadding>
-              <ListItemButton
-                selected={window.location.pathname === "/list"}
-                component={Link}
-                href="/list"
-              >
-                <ListItemIcon>
-                  <ListIcon />
-                </ListItemIcon>
-                <ListItemText primary="List" />
-              </ListItemButton>
-            </ListItem>
-            <ListItem disablePadding>
-              <ListItemButton
-                selected={window.location.pathname === "/settings"}
-                component={Link}
-                href="/settings"
-              >
-                <ListItemIcon>
-                  <Settings />
-                </ListItemIcon>
-                <ListItemText primary="Settings" />
-              </ListItemButton>
-            </ListItem>
-          </List>
-        )}
+        <List>
+          <ListItem disablePadding>
+            <ListItemButton
+              selected={currentPage === "/"}
+              component={Link}
+              href="/"
+            >
+              <ListItemIcon>
+                <DashboardIcon />
+              </ListItemIcon>
+              <ListItemText primary="Dashboard" />
+            </ListItemButton>
+          </ListItem>
+          <ListItem disablePadding>
+            <ListItemButton
+              selected={currentPage === "/calendar"}
+              component={Link}
+              href="/calendar"
+            >
+              <ListItemIcon>
+                <CalendarMonth />
+              </ListItemIcon>
+              <ListItemText primary="Calendar" />
+            </ListItemButton>
+          </ListItem>
+          <ListItem disablePadding>
+            <ListItemButton
+              selected={currentPage === "/list"}
+              component={Link}
+              href="/list"
+            >
+              <ListItemIcon>
+                <ListIcon />
+              </ListItemIcon>
+              <ListItemText primary="List" />
+            </ListItemButton>
+          </ListItem>
+          <ListItem disablePadding>
+            <ListItemButton
+              selected={currentPage === "/settings"}
+              component={Link}
+              href="/settings"
+            >
+              <ListItemIcon>
+                <Settings />
+              </ListItemIcon>
+              <ListItemText primary="Settings" />
+            </ListItemButton>
+          </ListItem>
+        </List>
+
         <ListItem disablePadding>
           <ListItemButton
             component={Link}
