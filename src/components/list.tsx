@@ -1,9 +1,7 @@
-import { Box, Divider, Link } from "@mui/material";
+import { Box, Link } from "@mui/material";
 import {
   DataGrid,
   GridColDef,
-  GridRowsProp,
-  GridToolbar,
   GridToolbarColumnsButton,
   GridToolbarContainer,
   GridToolbarDensitySelector,

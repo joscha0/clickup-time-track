@@ -4,19 +4,16 @@ import { NextPage } from "next";
 import Calendar from "@toast-ui/react-calendar";
 import "@toast-ui/calendar/dist/toastui-calendar.min.css";
 import React, { useState } from "react";
-import { ArrowLeft2, ArrowRight2 } from "iconsax-react";
 import {
   Box,
   Button,
-  Fab,
   FormControl,
   IconButton,
-  InputLabel,
   MenuItem,
   Select,
   SelectChangeEvent,
 } from "@mui/material";
-import { ArrowLeft, ChevronLeft, ChevronRight } from "@mui/icons-material";
+import { ChevronLeft, ChevronRight } from "@mui/icons-material";
 
 interface NewEvent {
   id: string;
