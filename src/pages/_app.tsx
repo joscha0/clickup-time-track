@@ -4,7 +4,7 @@ import "../styles/globals.css";
 
 import CssBaseline from "@mui/material/CssBaseline";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Box } from "@mui/material";
 import ResponsiveDrawer from "../components/drawer";
 
@@ -104,12 +104,19 @@ const MyApp: AppType = ({ Component, pageProps }) => {
   const [isDarkTheme, setIsDarkTheme] = useState(true);
 
   const toggleTheme = () => {
+    localStorage.setItem("is-dark-theme", (!isDarkTheme).toString());
     setIsDarkTheme(!isDarkTheme);
   };
 
   const drawerWidth = 240;
 
   const [drawerIndex, setDrawerIndex] = useState(0);
+
+  useEffect(() => {
+    const savedIsDarkTheme: boolean =
+      localStorage.getItem("is-dark-theme") === "true" ?? false;
+    setIsDarkTheme(savedIsDarkTheme);
+  }, []);
 
   return (
     <ThemeProvider theme={isDarkTheme ? darkTheme : lightTheme}>
