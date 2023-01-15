@@ -22,7 +22,6 @@ import Image from "next/image";
 
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import { BoxSearch } from "iconsax-react";
 
 interface Props {
   drawerWidth: number;
@@ -62,6 +61,7 @@ const ResponsiveDrawer = ({ drawerWidth, toggleTheme, isDarkTheme }: Props) => {
           flexDirection: "column",
           justifyContent: "space-between",
           height: "100vh",
+          maxHeight: "100dvh",
         }}
       >
         <List disablePadding>
