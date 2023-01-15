@@ -50,7 +50,7 @@ const TimeCalendar: NextPage<Props> = (props) => {
 
   const newCalendars = calendars.map((calendar, index) => {
     const color = colors[index % colors.length];
-    return { id: calendar, name: calendar, backgroundColor: color };
+    return { id: calendar, name: calendar, backgroundColor: color! };
   });
 
   const calendarRef = React.createRef<Calendar>();
@@ -143,8 +143,13 @@ const TimeCalendar: NextPage<Props> = (props) => {
   );
 };
 
+interface NewCalendar {
+  id: string;
+  name: string;
+  backgroundColor: string;
+}
 interface CalendarProps {
-  newCalendars: any[];
+  newCalendars: NewCalendar[];
   events: NewEvent[];
 }
 
