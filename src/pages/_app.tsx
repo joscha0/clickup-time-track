@@ -117,9 +117,10 @@ const MyApp: AppType = ({ Component, pageProps }) => {
   const isEmbed = router.query["embed"];
 
   useEffect(() => {
-    const savedIsDarkTheme: boolean =
-      localStorage.getItem("is-dark-theme") === "true" ?? false;
-    setIsDarkTheme(savedIsDarkTheme);
+    const savedIsDarkTheme = localStorage.getItem("is-dark-theme");
+    if (savedIsDarkTheme !== null) {
+      setIsDarkTheme(savedIsDarkTheme === "true");
+    }
   }, []);
 
   return (
