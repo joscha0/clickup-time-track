@@ -2,11 +2,23 @@
 
 > View tracked time from [ClickUp](https://clickup.com) time tracking
 
-![Screenshot from 2022-12-16 05-24-37](https://user-images.githubusercontent.com/45885696/208022307-1f489257-7c7c-46c7-b6d2-8bd79a911f39.png)
+![image](https://user-images.githubusercontent.com/45885696/212776911-d2b3f406-7679-41ce-9773-45e4fdced142.png)
 
 ## Features
-- Calendar View
-- List View
+### Calendar View
+![image](https://user-images.githubusercontent.com/45885696/212776723-5241baa5-2066-44cd-ad66-864e53b84bee.png)
+- day/week/month view
+
+### List View
+![image](https://user-images.githubusercontent.com/45885696/212776535-cbcf52cd-2c63-4248-8f82-8a93755612e5.png)
+- filter
+- search
+- export csv
+
+### Embeded View for Clickup Widget
+![Screenshot from 2023-01-16 23-35-44](https://user-images.githubusercontent.com/45885696/212775793-617e4b14-d1e4-4c9c-825d-076947260311.png)
+- to hide the menu add `?embed=true` to the url for example: https://clickup.960.eu/calendar?embed=true
+- add the embed in your clickup dashboard with a `Custom Embed`
 
 ## How to Use
 Fill the fields on the settings page and save
