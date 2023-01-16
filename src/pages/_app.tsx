@@ -7,6 +7,7 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 import React, { useEffect, useState } from "react";
 import { Box } from "@mui/material";
 import ResponsiveDrawer from "../components/drawer";
+import { useRouter } from "next/router";
 
 const darkTheme = createTheme({
   palette: {
@@ -112,6 +113,9 @@ const MyApp: AppType = ({ Component, pageProps }) => {
 
   const [drawerIndex, setDrawerIndex] = useState(0);
 
+  const router = useRouter();
+  const isEmbed = router.query["embed"];
+
   useEffect(() => {
     const savedIsDarkTheme: boolean =
       localStorage.getItem("is-dark-theme") === "true" ?? false;
@@ -122,16 +126,18 @@ const MyApp: AppType = ({ Component, pageProps }) => {
     <ThemeProvider theme={isDarkTheme ? darkTheme : lightTheme}>
       <Box sx={{ display: "flex" }}>
         <CssBaseline />
-        <ResponsiveDrawer
-          drawerWidth={drawerWidth}
-          isDarkTheme={isDarkTheme}
-          toggleTheme={toggleTheme}
-        />
+        {!isEmbed && (
+          <ResponsiveDrawer
+            drawerWidth={drawerWidth}
+            isDarkTheme={isDarkTheme}
+            toggleTheme={toggleTheme}
+          />
+        )}
         <Box
           component="main"
           sx={{
             flexGrow: 1,
-            width: { sm: `calc(100% - ${drawerWidth}px)` },
+            width: { sm: `calc(100% - ${isEmbed ? 0 : drawerWidth}px)` },
           }}
         >
           <Component
