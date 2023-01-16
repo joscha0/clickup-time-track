@@ -1,4 +1,9 @@
-import { CalendarMonth, GitHub, Settings } from "@mui/icons-material";
+import {
+  CalendarMonth,
+  ChevronLeft,
+  GitHub,
+  Settings,
+} from "@mui/icons-material";
 import ListIcon from "@mui/icons-material/List";
 import MenuIcon from "@mui/icons-material/Menu";
 import LightModeIcon from "@mui/icons-material/LightMode";
@@ -16,6 +21,9 @@ import {
   Box,
   IconButton,
   Typography,
+  styled,
+  BoxProps,
+  useTheme,
 } from "@mui/material";
 import Link from "next/link";
 import Image from "next/image";
@@ -34,8 +42,18 @@ const ResponsiveDrawer = ({ drawerWidth, toggleTheme, isDarkTheme }: Props) => {
   const [currentPage, setCurrentPage] = useState("");
   const router = useRouter();
 
+  const theme = useTheme();
+  const [open, setOpen] = useState(true);
+
+  const handleDrawerClose = () => {
+    setOpen(false);
+    console.log(open);
+  };
+
   const handleDrawerToggle = () => {
+    setOpen(!open);
     setMobileOpen(!mobileOpen);
+    console.log(open);
   };
 
   useEffect(() => {
@@ -67,12 +85,36 @@ const ResponsiveDrawer = ({ drawerWidth, toggleTheme, isDarkTheme }: Props) => {
         <List disablePadding>
           <ListItem>
             <Box
-              sx={{ display: "flex", py: 3, gap: 1, justifyContent: "center" }}
+              sx={{
+                display: "flex",
+                width: "100%",
+              }}
             >
-              <Image src="/logo.png" alt="logo" width={42} height={42} />
-              <Box>
-                <Typography fontWeight="bold">ClickUp</Typography>
-                <Typography>Time Track</Typography>
+              <Box
+                sx={{
+                  py: 3,
+                  display: "flex",
+                  gap: 1,
+                  justifyContent: "center",
+                }}
+              >
+                <Image src="/logo.png" alt="logo" width={42} height={42} />
+                <Box>
+                  <Typography fontWeight="bold">ClickUp</Typography>
+                  <Typography>Time Track</Typography>
+                </Box>
+              </Box>
+              <Box
+                sx={{
+                  display: "flex",
+                  flex: 1,
+                  alignItems: "flex-start",
+                  justifyContent: "flex-end",
+                }}
+              >
+                <IconButton onClick={handleDrawerToggle}>
+                  <ChevronLeft />
+                </IconButton>
               </Box>
             </Box>
             <Divider />
@@ -153,9 +195,9 @@ const ResponsiveDrawer = ({ drawerWidth, toggleTheme, isDarkTheme }: Props) => {
         position="fixed"
         sx={{
           zIndex: 999,
-          display: { sm: "none" },
-          width: { sm: `calc(100% - ${drawerWidth}px)` },
-          ml: { sm: `${drawerWidth}px` },
+          display: { sm: open ? "none" : "block" },
+          width: { sm: `calc(100% - ${open ? drawerWidth : 0}px)` },
+          ml: { sm: open ? `${drawerWidth}px` : 0 },
         }}
       >
         <Toolbar>
@@ -172,7 +214,7 @@ const ResponsiveDrawer = ({ drawerWidth, toggleTheme, isDarkTheme }: Props) => {
       </Box>
       <Box
         component="nav"
-        sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
+        sx={{ width: { sm: open ? drawerWidth : 0 }, flexShrink: { sm: 0 } }}
         aria-label="drawer"
       >
         <Drawer
@@ -199,6 +241,18 @@ const ResponsiveDrawer = ({ drawerWidth, toggleTheme, isDarkTheme }: Props) => {
             "& .MuiDrawer-paper": {
               boxSizing: "border-box",
               width: drawerWidth,
+
+              transition: theme.transitions.create(["width"], {
+                easing: theme.transitions.easing.sharp,
+                duration: theme.transitions.duration.leavingScreen,
+              }),
+              ...(!open && {
+                width: 0,
+                transition: theme.transitions.create(["width"], {
+                  easing: theme.transitions.easing.easeOut,
+                  duration: theme.transitions.duration.enteringScreen,
+                }),
+              }),
             },
           }}
           open
