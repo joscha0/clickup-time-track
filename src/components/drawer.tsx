@@ -69,7 +69,13 @@ const ResponsiveDrawer = ({ drawerWidth, toggleTheme, isDarkTheme }: Props) => {
             <Box
               sx={{ display: "flex", py: 3, gap: 1, justifyContent: "center" }}
             >
-              <Image src="/logo.png" alt="logo" width={42} height={42} />
+              <Image
+                src="/logo.png"
+                alt="logo"
+                width={42}
+                height={42}
+                priority
+              />
               <Box>
                 <Typography fontWeight="bold">ClickUp</Typography>
                 <Typography>Time Track</Typography>
