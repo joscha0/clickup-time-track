@@ -135,9 +135,17 @@ const TimeCalendar: NextPage<Props> = (props) => {
         </FormControl>
       </Box>
       {theme.palette.mode === "dark" ? (
-        <CalendarDark events={events} newCalendars={newCalendars} />
+        <CalendarDark
+          events={events}
+          newCalendars={newCalendars}
+          calendarRef={calendarRef}
+        />
       ) : (
-        <CalendarLight events={events} newCalendars={newCalendars} />
+        <CalendarLight
+          events={events}
+          newCalendars={newCalendars}
+          calendarRef={calendarRef}
+        />
       )}
     </Box>
   );
@@ -151,11 +159,11 @@ interface NewCalendar {
 interface CalendarProps {
   newCalendars: NewCalendar[];
   events: NewEvent[];
+  calendarRef: React.RefObject<Calendar>;
 }
 
 const CalendarDark = (props: CalendarProps) => {
-  const { events, newCalendars } = props;
-  const calendarRef = React.createRef<Calendar>();
+  const { events, newCalendars, calendarRef } = props;
   return (
     <Calendar
       ref={calendarRef}
@@ -176,8 +184,7 @@ const CalendarDark = (props: CalendarProps) => {
 };
 
 const CalendarLight = (props: CalendarProps) => {
-  const { events, newCalendars } = props;
-  const calendarRef = React.createRef<Calendar>();
+  const { events, newCalendars, calendarRef } = props;
   return (
     <Calendar
       ref={calendarRef}
